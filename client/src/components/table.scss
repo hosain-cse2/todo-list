@@ -1,0 +1,23 @@
+.table {
+  width: 70%;
+}
+
+.row {
+  display: flex;
+  padding: 4px 0;
+
+  & > p {
+    flex: 6;
+  }
+  & > p:first-child {
+    flex: 2;
+  }
+}
+
+.graphic {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  margin-right: 32px;
+  cursor: pointer;
+}

@@ -1,0 +1,39 @@
+.inputContainer {
+  width: 500px;
+  margin: 30px 0;
+}
+
+.todoListInput {
+  display: flex;
+  padding: 5px 0;
+  p {
+    flex: 3;
+  }
+
+  input {
+    flex: 9;
+    height: 30px;
+  }
+
+  textarea {
+    flex: 9;
+  }
+}
+
+.todoListTitle {
+  align-items: center;
+}
+
+.todoListDescription {
+  align-items: baseline;
+}
+
+.todoListAdd {
+  justify-content: flex-end;
+}
+
+.button {
+  width: 100px;
+  height: 30px;
+  margin-left: 5px;
+}
