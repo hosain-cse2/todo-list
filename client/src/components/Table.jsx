@@ -13,11 +13,13 @@ const Table = ({ data, onDelete, onEdit }) => {
             src={icons.delete}
             className={styles.graphic}
             onClick={() => onDelete && onDelete(item)}
+            title="Delete"
           />
           <img
             src={icons.edit}
             className={styles.graphic}
             onClick={() => onEdit && onEdit(item)}
+            title="Edit"
           />
         </div>
       ))}

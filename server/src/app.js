@@ -3,6 +3,15 @@ const { v4: uuidv4 } = require("uuid");
 const app = express();
 
 const todoList = [];
+const sessions = [];
+
+const credentials = [
+  { userName: "alice", password: "Abcd@1234" },
+  { userName: "bob", password: "Abcd@1234" },
+  { userName: "clara", password: "Abcd@1234" },
+  { userName: "john", password: "Abcd@1234" },
+  { userName: "martin", password: "Abcd@1234" },
+];
 
 app.use(express.json());
 
@@ -17,6 +26,55 @@ app.use((req, res, next) => {
     return res.status(200).json({});
   }
   next();
+});
+
+app.post("/login", (req, res) => {
+  const userName = req.body.userName;
+  const password = req.body.password;
+  console.log({ userName, password });
+
+  const searchedSession = sessions.find((session) => {
+    return session.userName === userName;
+  });
+
+  if (searchedSession) {
+    console.log("Already logged in...");
+    res.status(200).send({ userName, sessionId: searchedSession.sessionId });
+  } else {
+    const index = credentials.findIndex((credential) => {
+      return (
+        credential.userName === userName && credential.password === password
+      );
+    });
+
+    if (index > -1) {
+      console.log("Login successfull...");
+      const sessionId = uuidv4();
+      sessions.push({ userName, sessionId, startTime: new Date() });
+      res.status(200).send({ userName, sessionId });
+    } else {
+      console.log("Wrong user name or password...");
+      res.status(401).send("Wrong user name or password");
+    }
+  }
+});
+
+app.post("/logout", (req, res) => {
+  const currentSession = req.body.session;
+  const index = sessions.findIndex((session) => {
+    return (
+      session.userName === currentSession.userName &&
+      session.sessionId === currentSession.sessionId
+    );
+  });
+  if (index > -1) {
+    console.log("Logout successfull...");
+    sessions.splice(index, 1);
+    res.status(200).send("Successfully logged out");
+  } else {
+    console.log("Logout with warning...");
+    res.status(440).send("Logout with warning...");
+  }
 });
 
 app.post("/todolist", (req, res) => {

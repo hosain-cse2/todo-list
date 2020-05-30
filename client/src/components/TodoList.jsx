@@ -95,6 +95,7 @@ const TodoList = () => {
           )}
         </div>
       </div>
+      <div className={styles.divider} />
       <Table data={todoList} onDelete={onDeleteRow} onEdit={onEdit} />
     </>
   );

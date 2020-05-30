@@ -1,0 +1,43 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginInputContainer {
+  width: 500px;
+  padding: 30px;
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  box-shadow: 0px 2px 16px rgba(33, 43, 54, 0.23);
+}
+
+.inputCredential {
+  display: flex;
+  padding: 5px 0;
+  align-items: center;
+
+  p {
+    flex: 3;
+  }
+
+  input {
+    flex: 9;
+    height: 30px;
+  }
+}
+
+.loginButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 0 0;
+}
+
+.loginButton {
+  width: 100px;
+  height: 30px;
+  margin-left: 5px;
+  cursor: pointer;
+}
