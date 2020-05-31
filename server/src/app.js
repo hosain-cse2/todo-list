@@ -33,29 +33,27 @@ app.post("/login", (req, res) => {
   const password = req.body.password;
   console.log({ userName, password });
 
-  const searchedSession = sessions.find((session) => {
-    return session.userName === userName;
+  const index = credentials.findIndex((credential) => {
+    return credential.userName === userName && credential.password === password;
   });
 
-  if (searchedSession) {
-    console.log("Already logged in...");
-    res.status(200).send({ userName, sessionId: searchedSession.sessionId });
-  } else {
-    const index = credentials.findIndex((credential) => {
-      return (
-        credential.userName === userName && credential.password === password
-      );
+  if (index > -1) {
+    const searchedSession = sessions.find((session) => {
+      return session.userName === userName;
     });
 
-    if (index > -1) {
+    if (searchedSession) {
+      console.log("Already logged in...");
+      res.status(200).send({ userName, sessionId: searchedSession.sessionId });
+    } else {
       console.log("Login successfull...");
       const sessionId = uuidv4();
       sessions.push({ userName, sessionId, startTime: new Date() });
       res.status(200).send({ userName, sessionId });
-    } else {
-      console.log("Wrong user name or password...");
-      res.status(401).send("Wrong user name or password");
     }
+  } else {
+    console.log("Wrong user name or password...");
+    res.status(401).send("Wrong user name or password");
   }
 });
 
